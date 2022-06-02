@@ -1,0 +1,38 @@
+extends ./layout/index
+
+block contenido    
+    main(class="container mt-5")
+        h1(class="text-center mt-5") #{pagina}
+
+        blockquote(class="text-center") Lee sobre nuestros clientes y sus experiencias
+
+        include ./layout/bloque_testimoniales
+
+
+        div(class="row")
+
+            div(class="col-md-12")
+                h2(class="d-block w-100 text-center") Agregar Un testimonial
+
+                if(errores)
+                    each error in errores   
+                        div(class="alert col alert-danger text-center") #{error.mensaje}
+                
+                
+
+            div(class="row justify-content-center col")
+                div(class="col-md-8")
+                    form(action="/testimoniales", method="POST") 
+                        div(class="form-group")
+                            label(for="nombre") Nombre
+                            input#nombre(type="text" name="nombre" placeholder="nombre" value=nombre  class="form-control")
+
+                        div(class="form-group")
+                            label(for="correo") Correo Electronico
+                            input#correo(type="email" name="correo" placeholder="correo" value=correo class="form-control")
+
+                        div(class="form-group")
+                            label(for="mensaje") Mensaje
+                            textarea#mensaje(name="mensaje" rows="3" placeholder="Tu mensaje" class="form-control") #{mensaje}
+
+                        input(type="submit", value="Enviar" class="btn btn-success btn-block")
